@@ -15,7 +15,7 @@ import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/deployments")({
   head: pageHead("Deployments", "Pipeline, build logs, queue and history for every HELM deployment."),
-  validateSearch: (s: Record<string, unknown>): { deploy?: boolean } => (s.deploy ? { deploy: true } : {}),
+  validateSearch: (s: Record<string, unknown>): { deploy?: boolean } => (s["deploy"] ? { deploy: true } : {}),
   loader: ({ context: { queryClient: q } }) => Promise.all([q.ensureQueryData(api.deployments), q.ensureQueryData(api.projects)]),
   component: Deployments,
 });
@@ -38,7 +38,7 @@ function Deployments() {
   const [logs, setLogs] = useState<LogLine[]>(data.logs);
   const [auto, setAuto] = useState(true);
   const [newOpen, setNewOpen] = useState(!!search.deploy);
-  const [proj, setProj] = useState(projects[0].name);
+  const [proj, setProj] = useState(projects[0]?.name ?? "");
   const current = history.find((d) => d.status === "building");
   const box = useRef<HTMLDivElement>(null);
 
@@ -52,7 +52,7 @@ function Deployments() {
         const next = prev.map((s, j) => j === i ? { ...s, status: "completed" as const, sec: s.sec || 8 } : j === i + 1 ? { ...s, status: "running" as const } : s);
         const nextStep = prev[i + 1]?.name;
         if (nextStep) setLogs((l) => [...l, ...(stepLogs[nextStep] ?? []).map(([level, msg], k) => ({ id: l.length + k, ts: new Date().toISOString(), level, msg }))]);
-        if (i === prev.length - 2) setTimeout(() => { setHistory((h) => h.map((d) => d.id === current.id ? { ...d, status: "live", durationSec: 128 } : d)); next[prev.length - 1].status = "completed"; toast.success(`${current.project} is live`); }, 1500);
+        if (i === prev.length - 2) setTimeout(() => { setHistory((h) => h.map((d) => d.id === current.id ? { ...d, status: "live", durationSec: 128 } : d)); const last = next[prev.length - 1]; if (last) last.status = "completed"; toast.success(`${current.project} is live`); }, 1500);
         return next;
       });
     }, 3000);

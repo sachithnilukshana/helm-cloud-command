@@ -219,4 +219,4 @@ export const buildLogs: T.LogLine[] = [
   ["info", "added 812 packages in 21.4s"],
   ["info", "nest build"],
   ["debug", "tsc -p tsconfig.build.json"],
-].map(([level, msg], i) => ({ id: i, ts: new Date(now - (7 - i) * 6000).toISOString(), level: level as T.LogLine["level"], msg }));
+].map(([level, msg]: string[], i) => ({ id: i, ts: new Date(now - (7 - i) * 6000).toISOString(), level: level as T.LogLine["level"], msg: msg ?? "" }));

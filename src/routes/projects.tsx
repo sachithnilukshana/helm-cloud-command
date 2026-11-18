@@ -18,7 +18,7 @@ import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/projects")({
   head: pageHead("Projects", "Manage applications, frameworks and live URLs deployed with HELM."),
-  validateSearch: (s: Record<string, unknown>): { q?: string } => (typeof s.q === "string" ? { q: s.q } : {}),
+  validateSearch: (s: Record<string, unknown>): { q?: string } => (typeof s["q"] === "string" ? { q: s["q"] as string } : {}),
   loader: ({ context }) => context.queryClient.ensureQueryData(api.projects),
   component: Projects,
 });

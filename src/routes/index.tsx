@@ -28,7 +28,7 @@ function Overview() {
   const { data: procs } = useSuspenseQuery(api.processes);
   const { data: activity } = useSuspenseQuery(api.activity);
   const [refreshing, setRefreshing] = useState(false);
-  const server = servers.find((s) => s.id === serverId) ?? servers[0];
+  const server = (servers.find((s) => s.id === serverId) ?? servers[0])!;
   const col = (k: "cpu" | "ram" | "disk" | "rx") => metrics.map((m) => m[k]);
   const live = projects.filter((p) => p.status === "live");
 
