@@ -10,12 +10,48 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiManagerRouteImport } from './routes/api-manager'
+import { Route as BackupsRouteImport } from './routes/backups'
+import { Route as CronRouteImport } from './routes/cron'
+import { Route as DatabasesRouteImport } from './routes/databases'
 import { Route as DeploymentsRouteImport } from './routes/deployments'
+import { Route as DomainsRouteImport } from './routes/domains'
+import { Route as FilesRouteImport } from './routes/files'
+import { Route as MonitoringRouteImport } from './routes/monitoring'
+import { Route as NotificationsRouteImport } from './routes/notifications'
+import { Route as PluginsRouteImport } from './routes/plugins'
 import { Route as ProjectsRouteImport } from './routes/projects'
+import { Route as SecurityRouteImport } from './routes/security'
+import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as StorageRouteImport } from './routes/storage'
+import { Route as TerminalRouteImport } from './routes/terminal'
+import { Route as WorkersRouteImport } from './routes/workers'
+import { Route as ServersIndexRouteImport } from './routes/servers/index'
+import { Route as ServersIdRouteImport } from './routes/servers/$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiManagerRoute = ApiManagerRouteImport.update({
+  id: '/api-manager',
+  path: '/api-manager',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BackupsRoute = BackupsRouteImport.update({
+  id: '/backups',
+  path: '/backups',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CronRoute = CronRouteImport.update({
+  id: '/cron',
+  path: '/cron',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DatabasesRoute = DatabasesRouteImport.update({
+  id: '/databases',
+  path: '/databases',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DeploymentsRoute = DeploymentsRouteImport.update({
@@ -23,40 +59,222 @@ const DeploymentsRoute = DeploymentsRouteImport.update({
   path: '/deployments',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DomainsRoute = DomainsRouteImport.update({
+  id: '/domains',
+  path: '/domains',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FilesRoute = FilesRouteImport.update({
+  id: '/files',
+  path: '/files',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MonitoringRoute = MonitoringRouteImport.update({
+  id: '/monitoring',
+  path: '/monitoring',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NotificationsRoute = NotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PluginsRoute = PluginsRouteImport.update({
+  id: '/plugins',
+  path: '/plugins',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProjectsRoute = ProjectsRouteImport.update({
   id: '/projects',
   path: '/projects',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SecurityRoute = SecurityRouteImport.update({
+  id: '/security',
+  path: '/security',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StorageRoute = StorageRouteImport.update({
+  id: '/storage',
+  path: '/storage',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TerminalRoute = TerminalRouteImport.update({
+  id: '/terminal',
+  path: '/terminal',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WorkersRoute = WorkersRouteImport.update({
+  id: '/workers',
+  path: '/workers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServersIndexRoute = ServersIndexRouteImport.update({
+  id: '/servers/',
+  path: '/servers/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServersIdRoute = ServersIdRouteImport.update({
+  id: '/servers/$id',
+  path: '/servers/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/api-manager': typeof ApiManagerRoute
+  '/backups': typeof BackupsRoute
+  '/cron': typeof CronRoute
+  '/databases': typeof DatabasesRoute
   '/deployments': typeof DeploymentsRoute
+  '/domains': typeof DomainsRoute
+  '/files': typeof FilesRoute
+  '/monitoring': typeof MonitoringRoute
+  '/notifications': typeof NotificationsRoute
+  '/plugins': typeof PluginsRoute
   '/projects': typeof ProjectsRoute
+  '/security': typeof SecurityRoute
+  '/settings': typeof SettingsRoute
+  '/storage': typeof StorageRoute
+  '/terminal': typeof TerminalRoute
+  '/workers': typeof WorkersRoute
+  '/servers/$id': typeof ServersIdRoute
+  '/servers/': typeof ServersIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/api-manager': typeof ApiManagerRoute
+  '/backups': typeof BackupsRoute
+  '/cron': typeof CronRoute
+  '/databases': typeof DatabasesRoute
   '/deployments': typeof DeploymentsRoute
+  '/domains': typeof DomainsRoute
+  '/files': typeof FilesRoute
+  '/monitoring': typeof MonitoringRoute
+  '/notifications': typeof NotificationsRoute
+  '/plugins': typeof PluginsRoute
   '/projects': typeof ProjectsRoute
+  '/security': typeof SecurityRoute
+  '/settings': typeof SettingsRoute
+  '/storage': typeof StorageRoute
+  '/terminal': typeof TerminalRoute
+  '/workers': typeof WorkersRoute
+  '/servers/$id': typeof ServersIdRoute
+  '/servers': typeof ServersIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/api-manager': typeof ApiManagerRoute
+  '/backups': typeof BackupsRoute
+  '/cron': typeof CronRoute
+  '/databases': typeof DatabasesRoute
   '/deployments': typeof DeploymentsRoute
+  '/domains': typeof DomainsRoute
+  '/files': typeof FilesRoute
+  '/monitoring': typeof MonitoringRoute
+  '/notifications': typeof NotificationsRoute
+  '/plugins': typeof PluginsRoute
   '/projects': typeof ProjectsRoute
+  '/security': typeof SecurityRoute
+  '/settings': typeof SettingsRoute
+  '/storage': typeof StorageRoute
+  '/terminal': typeof TerminalRoute
+  '/workers': typeof WorkersRoute
+  '/servers/$id': typeof ServersIdRoute
+  '/servers/': typeof ServersIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/deployments' | '/projects'
+  fullPaths:
+    | '/'
+    | '/api-manager'
+    | '/backups'
+    | '/cron'
+    | '/databases'
+    | '/deployments'
+    | '/domains'
+    | '/files'
+    | '/monitoring'
+    | '/notifications'
+    | '/plugins'
+    | '/projects'
+    | '/security'
+    | '/settings'
+    | '/storage'
+    | '/terminal'
+    | '/workers'
+    | '/servers/$id'
+    | '/servers/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/deployments' | '/projects'
-  id: '__root__' | '/' | '/deployments' | '/projects'
+  to:
+    | '/'
+    | '/api-manager'
+    | '/backups'
+    | '/cron'
+    | '/databases'
+    | '/deployments'
+    | '/domains'
+    | '/files'
+    | '/monitoring'
+    | '/notifications'
+    | '/plugins'
+    | '/projects'
+    | '/security'
+    | '/settings'
+    | '/storage'
+    | '/terminal'
+    | '/workers'
+    | '/servers/$id'
+    | '/servers'
+  id:
+    | '__root__'
+    | '/'
+    | '/api-manager'
+    | '/backups'
+    | '/cron'
+    | '/databases'
+    | '/deployments'
+    | '/domains'
+    | '/files'
+    | '/monitoring'
+    | '/notifications'
+    | '/plugins'
+    | '/projects'
+    | '/security'
+    | '/settings'
+    | '/storage'
+    | '/terminal'
+    | '/workers'
+    | '/servers/$id'
+    | '/servers/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ApiManagerRoute: typeof ApiManagerRoute
+  BackupsRoute: typeof BackupsRoute
+  CronRoute: typeof CronRoute
+  DatabasesRoute: typeof DatabasesRoute
   DeploymentsRoute: typeof DeploymentsRoute
+  DomainsRoute: typeof DomainsRoute
+  FilesRoute: typeof FilesRoute
+  MonitoringRoute: typeof MonitoringRoute
+  NotificationsRoute: typeof NotificationsRoute
+  PluginsRoute: typeof PluginsRoute
   ProjectsRoute: typeof ProjectsRoute
+  SecurityRoute: typeof SecurityRoute
+  SettingsRoute: typeof SettingsRoute
+  StorageRoute: typeof StorageRoute
+  TerminalRoute: typeof TerminalRoute
+  WorkersRoute: typeof WorkersRoute
+  ServersIdRoute: typeof ServersIdRoute
+  ServersIndexRoute: typeof ServersIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -68,11 +286,74 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api-manager': {
+      id: '/api-manager'
+      path: '/api-manager'
+      fullPath: '/api-manager'
+      preLoaderRoute: typeof ApiManagerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/backups': {
+      id: '/backups'
+      path: '/backups'
+      fullPath: '/backups'
+      preLoaderRoute: typeof BackupsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cron': {
+      id: '/cron'
+      path: '/cron'
+      fullPath: '/cron'
+      preLoaderRoute: typeof CronRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/databases': {
+      id: '/databases'
+      path: '/databases'
+      fullPath: '/databases'
+      preLoaderRoute: typeof DatabasesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/deployments': {
       id: '/deployments'
       path: '/deployments'
       fullPath: '/deployments'
       preLoaderRoute: typeof DeploymentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/domains': {
+      id: '/domains'
+      path: '/domains'
+      fullPath: '/domains'
+      preLoaderRoute: typeof DomainsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/files': {
+      id: '/files'
+      path: '/files'
+      fullPath: '/files'
+      preLoaderRoute: typeof FilesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/monitoring': {
+      id: '/monitoring'
+      path: '/monitoring'
+      fullPath: '/monitoring'
+      preLoaderRoute: typeof MonitoringRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/notifications': {
+      id: '/notifications'
+      path: '/notifications'
+      fullPath: '/notifications'
+      preLoaderRoute: typeof NotificationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/plugins': {
+      id: '/plugins'
+      path: '/plugins'
+      fullPath: '/plugins'
+      preLoaderRoute: typeof PluginsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/projects': {
@@ -82,13 +363,78 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProjectsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/security': {
+      id: '/security'
+      path: '/security'
+      fullPath: '/security'
+      preLoaderRoute: typeof SecurityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/storage': {
+      id: '/storage'
+      path: '/storage'
+      fullPath: '/storage'
+      preLoaderRoute: typeof StorageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terminal': {
+      id: '/terminal'
+      path: '/terminal'
+      fullPath: '/terminal'
+      preLoaderRoute: typeof TerminalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/workers': {
+      id: '/workers'
+      path: '/workers'
+      fullPath: '/workers'
+      preLoaderRoute: typeof WorkersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servers/': {
+      id: '/servers/'
+      path: '/servers'
+      fullPath: '/servers/'
+      preLoaderRoute: typeof ServersIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servers/$id': {
+      id: '/servers/$id'
+      path: '/servers/$id'
+      fullPath: '/servers/$id'
+      preLoaderRoute: typeof ServersIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ApiManagerRoute: ApiManagerRoute,
+  BackupsRoute: BackupsRoute,
+  CronRoute: CronRoute,
+  DatabasesRoute: DatabasesRoute,
   DeploymentsRoute: DeploymentsRoute,
+  DomainsRoute: DomainsRoute,
+  FilesRoute: FilesRoute,
+  MonitoringRoute: MonitoringRoute,
+  NotificationsRoute: NotificationsRoute,
+  PluginsRoute: PluginsRoute,
   ProjectsRoute: ProjectsRoute,
+  SecurityRoute: SecurityRoute,
+  SettingsRoute: SettingsRoute,
+  StorageRoute: StorageRoute,
+  TerminalRoute: TerminalRoute,
+  WorkersRoute: WorkersRoute,
+  ServersIdRoute: ServersIdRoute,
+  ServersIndexRoute: ServersIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
