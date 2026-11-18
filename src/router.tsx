@@ -1,5 +1,6 @@
 import { QueryClient } from "@tanstack/react-query";
 import { createRouter } from "@tanstack/react-router";
+import { PendingPage } from "./components/helm/pending";
 import { routeTree } from "./routeTree.gen";
 
 export const getRouter = () => {
@@ -10,6 +11,8 @@ export const getRouter = () => {
     routeTree,
     context: { queryClient },
     scrollRestoration: true,
+    defaultPendingComponent: PendingPage,
+    defaultPendingMs: 150,
     // Lets Query own freshness; set caching defaults on the QueryClient, not the router.
     defaultPreloadStaleTime: 0,
   });
