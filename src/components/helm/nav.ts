@@ -27,6 +27,7 @@ export const nav = [
   ] },
 ] as const;
 
-export const flatNav = nav.flatMap((g) => g.items);
-export type NavPath = (typeof flatNav)[number]["to"];
+type NavItem = (typeof nav)[number]["items"][number];
+export const flatNav: NavItem[] = nav.flatMap((g) => [...g.items] as NavItem[]);
+export type NavPath = NavItem["to"];
 export { Boxes };

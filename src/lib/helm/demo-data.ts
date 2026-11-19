@@ -38,7 +38,7 @@ export const queue: T.Deployment[] = [
 
 export const metrics = (points = 24): T.MetricPoint[] => {
   const cpu = series(points, 45, 18, 1), ram = series(points, 60, 8, 2), rx = series(points, 320, 140, 3), tx = series(points, 180, 90, 4), disk = series(points, 48, 3, 5);
-  return cpu.map((c, i) => ({ t: i, cpu: Math.min(100, c), ram: Math.min(100, ram[i]), rx: rx[i], tx: tx[i], disk: disk[i] }));
+  return cpu.map((c, i) => ({ t: i, cpu: Math.min(100, c), ram: Math.min(100, ram[i] ?? 0), rx: rx[i] ?? 0, tx: tx[i] ?? 0, disk: disk[i] ?? 0 }));
 };
 
 export const processes: T.Process[] = [

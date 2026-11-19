@@ -86,7 +86,7 @@ function SidebarFooter({ collapsed, onToggle }: { collapsed?: boolean; onToggle?
 function Breadcrumbs() {
   const path = useRouterState({ select: (s) => s.location.pathname });
   const segs = path.split("/").filter(Boolean);
-  const top = flatNav.find((n) => n.to === `/${segs[0] ?? ""}`) ?? flatNav[0];
+  const top = flatNav.find((n) => n.to === `/${segs[0] ?? ""}`) ?? flatNav[0]!;
   return (
     <ol className="flex min-w-0 items-center gap-1.5 text-sm">
       <li className="hidden text-muted-foreground sm:block">Northwind</li>
