@@ -6,6 +6,8 @@ import * as demo from "./demo-data";
  * DEMO_MODE serves fictional data; swap `fetcher` for real HTTP calls to integrate a backend.
  */
 export const DEMO_MODE = true;
+/** Set when the HELM Agent exists; empty until then. */
+export const AGENT_BASE_URL: string = import.meta.env["VITE_HELM_AGENT_URL"] ?? "";
 
 const delay = (ms = 250) => new Promise((r) => setTimeout(r, ms));
 async function fetcher<T>(key: string, demoValue: () => T): Promise<T> {
@@ -13,9 +15,18 @@ async function fetcher<T>(key: string, demoValue: () => T): Promise<T> {
     await delay();
     return structuredClone(demoValue());
   }
-  const res = await fetch(`/api/helm/${key}`);
-  if (!res.ok) throw new Error(`Request failed: ${key}`);
-  return res.json();
+  // Real HELM Agent integration point. Base URL/endpoints are defined by the agent, not invented here.
+  const { setConnectionState, markRealDataReceived } = await import("./connection");
+  try {
+    const res = await fetch(`${AGENT_BASE_URL}/${key}`);
+    if (!res.ok) { setConnectionState(res.status === 401 || res.status === 403 ? "disconnected" : "error"); throw new Error(`Request failed: ${key} (${res.status})`); }
+    const json = (await res.json()) as T;
+    markRealDataReceived();
+    return json;
+  } catch (e) {
+    if (e instanceof TypeError) setConnectionState("disconnected");
+    throw e;
+  }
 }
 
 const q = <T,>(key: string, fn: () => T) => queryOptions({ queryKey: ["helm", key], queryFn: () => fetcher(key, fn), staleTime: 30_000 });

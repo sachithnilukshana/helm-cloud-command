@@ -5,6 +5,7 @@ import { Bell, ChevronsLeft, ChevronsRight, ChevronDown, Menu, Search, Settings,
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { api, DEMO_MODE } from "@/lib/helm/api";
+import { ConnectionBadge, DemoNotice } from "@/components/helm/ui";
 import { nav, flatNav } from "./nav";
 import { StatusBadge, timeAgo } from "./ui";
 import { CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
@@ -71,7 +72,7 @@ function SidebarFooter({ collapsed, onToggle }: { collapsed?: boolean; onToggle?
       <div className={cn("flex items-center gap-2", collapsed && "flex-col")}>
         <Link to="/settings" className="flex min-w-0 flex-1 items-center gap-2 rounded-md p-1.5 hover:bg-sidebar-accent" title="Account settings">
           <span className="grid size-7 shrink-0 place-items-center rounded-full bg-primary/15 text-xs font-semibold text-primary">SD</span>
-          {!collapsed && <span className="min-w-0"><span className="block truncate text-sm">Sachith Dev</span><span className="block truncate text-[11px] text-muted-foreground">Owner · Northwind</span></span>}
+          {!collapsed && <span className="min-w-0"><span className="block truncate text-sm">Sachith Dev</span><span className="block truncate text-[11px] text-muted-foreground">Owner · HELM Demo</span></span>}
         </Link>
         {onToggle && (
           <button onClick={onToggle} className="rounded-md p-1.5 text-muted-foreground hover:bg-sidebar-accent hover:text-foreground" aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}>
@@ -89,7 +90,7 @@ function Breadcrumbs() {
   const top = flatNav.find((n) => n.to === `/${segs[0] ?? ""}`) ?? flatNav[0]!;
   return (
     <ol className="flex min-w-0 items-center gap-1.5 text-sm">
-      <li className="hidden text-muted-foreground sm:block">Northwind</li>
+      <li className="hidden text-muted-foreground sm:block">HELM Demo</li>
       <li className="hidden text-muted-foreground/50 sm:block">/</li>
       <li><Link to={top.to} className={cn(segs.length > 1 ? "text-muted-foreground hover:text-foreground" : "font-medium")}>{top.title}</Link></li>
       {segs[1] && <><li className="text-muted-foreground/50">/</li><li className="truncate font-mono text-xs font-medium">{decodeURIComponent(segs[1])}</li></>}
@@ -210,7 +211,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                 </button>
                 <button onClick={() => setCmd(true)} className="rounded-md p-2 text-muted-foreground hover:bg-accent lg:hidden" aria-label="Search"><Search className="size-4" /></button>
                 <ServerSelector />
-                {DEMO_MODE && <span className="hidden rounded border border-primary/30 bg-primary/10 px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wider text-primary sm:inline">Demo mode</span>}
+                <ConnectionBadge className="hidden sm:inline-flex" />
                 <NotificationBell />
                 <DropdownMenu>
                   <DropdownMenuTrigger className="rounded-md p-2 text-muted-foreground hover:bg-accent hover:text-foreground" aria-label="Theme settings"><Palette className="size-4" /></DropdownMenuTrigger>
@@ -226,7 +227,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                 <DropdownMenu>
                   <DropdownMenuTrigger className="ml-1 grid size-8 place-items-center rounded-full bg-primary/15 text-xs font-semibold text-primary ring-1 ring-primary/30" aria-label="Account menu">SD</DropdownMenuTrigger>
                   <DropdownMenuContent align="end" className="w-52">
-                    <DropdownMenuLabel>sachith@northwind.io</DropdownMenuLabel>
+                    <DropdownMenuLabel>sachith@demo.helm.run</DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem asChild><Link to="/settings"><User className="mr-2 size-4" />Profile</Link></DropdownMenuItem>
                     <DropdownMenuItem asChild><Link to="/settings"><Settings className="mr-2 size-4" />Account settings</Link></DropdownMenuItem>
@@ -235,7 +236,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                 </DropdownMenu>
               </div>
             </header>
-            <main className="mx-auto w-full max-w-[1440px] flex-1 p-4 sm:p-6">{children}</main>
+            <main className="mx-auto w-full max-w-[1440px] flex-1 p-4 sm:p-6">{DEMO_MODE && <DemoNotice />}{children}</main>
           </div>
         </div>
         <CommandPalette open={cmd} setOpen={setCmd} />

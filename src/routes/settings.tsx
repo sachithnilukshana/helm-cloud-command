@@ -19,8 +19,8 @@ function Settings() {
       <Panel title="Profile">
         <form className="grid gap-4 sm:grid-cols-2" onSubmit={(e) => { e.preventDefault(); toast.success("Profile saved"); }}>
           <div className="space-y-1.5"><Label htmlFor="n">Name</Label><Input id="n" defaultValue="Sachith Dev" /></div>
-          <div className="space-y-1.5"><Label htmlFor="e">Email</Label><Input id="e" type="email" defaultValue="sachith@northwind.io" /></div>
-          <div className="space-y-1.5"><Label htmlFor="w">Workspace</Label><Input id="w" defaultValue="Northwind" /></div>
+          <div className="space-y-1.5"><Label htmlFor="e">Email</Label><Input id="e" type="email" defaultValue="sachith@demo.helm.run" /></div>
+          <div className="space-y-1.5"><Label htmlFor="w">Workspace</Label><Input id="w" defaultValue="HELM Demo" /></div>
           <div className="space-y-1.5"><Label htmlFor="tz">Timezone</Label><Input id="tz" defaultValue="Asia/Colombo" /></div>
           <div className="sm:col-span-2"><Button type="submit">Save changes</Button></div>
         </form>
@@ -32,7 +32,7 @@ function Settings() {
       </Panel>
       <Panel title="Danger zone" className="border-destructive/40">
         <div className="flex items-center justify-between gap-4"><p className="text-sm text-muted-foreground">Delete this workspace and all its servers, projects and backups.</p>
-          <Confirm trigger={<Button variant="destructive">Delete workspace</Button>} destructive title="Delete Northwind?" description="This permanently removes everything and cannot be undone." confirmLabel="Delete" onConfirm={() => toast.error("Deletion disabled in demo mode")} /></div>
+          <Confirm trigger={<Button variant="destructive">Delete workspace</Button>} destructive title="Delete HELM Demo workspace?" description="This permanently removes everything and cannot be undone." confirmLabel="Delete" onConfirm={() => toast.error("Deletion disabled in demo mode")} /></div>
       </Panel>
     </div>
   );

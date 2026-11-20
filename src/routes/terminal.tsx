@@ -20,7 +20,7 @@ const replies: Record<string, string> = {
 
 function Terminal() {
   const { serverId } = useActiveServer();
-  const [lines, setLines] = useState<string[]>([`Connected to ${serverId}. Type "help".`]);
+  const [lines, setLines] = useState<string[]>([`Demo shell for ${serverId} (simulated, no real server). Type "help".`]);
   const [cmd, setCmd] = useState("");
   const end = useRef<HTMLDivElement>(null);
   useEffect(() => end.current?.scrollIntoView({ block: "nearest" }), [lines]);

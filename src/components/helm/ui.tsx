@@ -3,14 +3,60 @@ import { Area, AreaChart, ResponsiveContainer } from "recharts";
 import { motion } from "framer-motion";
 import { Inbox, TrendingDown, TrendingUp } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { connectionLabel, type ConnectionState, useConnectionState } from "@/lib/helm/connection";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 
-export function timeAgo(iso: string) {
-  const s = Math.max(0, (Date.now() - new Date(iso).getTime()) / 1000);
+/** Parses an ISO string / epoch ms / Date. Returns null for missing or invalid input. */
+export function parseDate(v: string | number | Date | null | undefined): Date | null {
+  if (v === null || v === undefined || v === "") return null;
+  const d = v instanceof Date ? v : new Date(typeof v === "string" && /^\d+$/.test(v) ? Number(v) : v);
+  const t = d.getTime();
+  // Reject NaN and implausible values (e.g. epoch 0 from a missing field).
+  if (!Number.isFinite(t) || d.getFullYear() < 2000) return null;
+  return d;
+}
+
+/** Readable absolute date, e.g. "Nov 20, 2026". */
+export function formatDate(v: string | number | Date | null | undefined, withTime = false) {
+  const d = parseDate(v);
+  if (!d) return "—";
+  return d.toLocaleString("en-US", withTime ? { month: "short", day: "numeric", year: "numeric", hour: "2-digit", minute: "2-digit" } : { month: "short", day: "numeric", year: "numeric" });
+}
+
+/** Relative time, e.g. "5 minutes ago". Older than 30 days falls back to a date. */
+export function timeAgo(v: string | number | Date | null | undefined, now = Date.now()) {
+  const d = parseDate(v);
+  if (!d) return "—";
+  const s = Math.round((now - d.getTime()) / 1000);
+  if (s < -60) return formatDate(d); // future timestamp
   if (s < 60) return "just now";
-  if (s < 3600) return `${Math.floor(s / 60)}m ago`;
-  if (s < 86400) return `${Math.floor(s / 3600)}h ago`;
-  return `${Math.floor(s / 86400)}d ago`;
+  const unit = (n: number, w: string) => `${n} ${w}${n === 1 ? "" : "s"} ago`;
+  if (s < 3600) return unit(Math.floor(s / 60), "minute");
+  if (s < 86400) return unit(Math.floor(s / 3600), "hour");
+  if (s < 86400 * 30) return unit(Math.floor(s / 86400), "day");
+  return formatDate(d);
+}
+
+const connStyle: Record<ConnectionState, string> = {
+  demo: "border-primary/30 bg-primary/10 text-primary",
+  connecting: "border-warning/30 bg-warning/10 text-warning",
+  connected: "border-success/30 bg-success/10 text-success",
+  disconnected: "border-destructive/30 bg-destructive/10 text-destructive",
+  error: "border-destructive/30 bg-destructive/10 text-destructive",
+};
+
+/** Shows the backend connection state. "Connected" only appears when the API layer confirms it. */
+export function ConnectionBadge({ className }: { className?: string }) {
+  const state = useConnectionState();
+  return <span className={cn("items-center gap-1.5 rounded border px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wider", connStyle[state], className)}><span className={cn("size-1.5 rounded-full bg-current", state === "connecting" && "animate-pulse")} />{connectionLabel[state]}</span>;
+}
+
+export function DemoNotice() {
+  return <div role="note" className="mb-4 rounded-md border border-primary/25 bg-primary/5 px-3 py-2 text-xs text-muted-foreground"><span className="font-semibold uppercase tracking-wider text-primary">Demo mode</span> · All servers, projects, domains, processes, deployments, IP addresses and metrics shown are sample data. No real VPS is connected.</div>;
+}
+
+export function DemoTag() {
+  return <span className="rounded border border-primary/30 bg-primary/10 px-1 py-px text-[9px] font-medium uppercase tracking-wider text-primary">Demo</span>;
 }
 
 export function PageHeader({ title, description, actions }: { title: string; description?: string; actions?: ReactNode }) {

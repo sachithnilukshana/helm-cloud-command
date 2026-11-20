@@ -14,26 +14,26 @@ export const servers: T.Server[] = [
 ];
 
 export const projects: T.Project[] = [
-  { id: "p1", name: "atlas-web", framework: "Next.js", repo: "github.com/northwind/atlas-web", branch: "main", url: "atlas.northwind.io", status: "live", frontend: "healthy", backend: "healthy", lastDeploy: ago(14), serverId: "fra-01" },
-  { id: "p2", name: "ledger-api", framework: "NestJS", repo: "github.com/northwind/ledger-api", branch: "main", url: "api.ledger.dev", status: "building", frontend: "none", backend: "healthy", lastDeploy: ago(2), serverId: "fra-01" },
-  { id: "p3", name: "orbit-dashboard", framework: "Vite", repo: "github.com/northwind/orbit", branch: "develop", url: "orbit.northwind.io", status: "live", frontend: "healthy", backend: "degraded", lastDeploy: ago(180), serverId: "ams-02" },
-  { id: "p4", name: "pulse-ingest", framework: "Go", repo: "github.com/northwind/pulse", branch: "main", url: "ingest.pulse.sh", status: "failed", frontend: "none", backend: "down", lastDeploy: ago(55), serverId: "nyc-03" },
-  { id: "p5", name: "marketing-site", framework: "Astro", repo: "github.com/northwind/site", branch: "main", url: "northwind.io", status: "live", frontend: "healthy", backend: "none", lastDeploy: ago(1440), serverId: "ams-02" },
-  { id: "p6", name: "ml-inference", framework: "FastAPI", repo: "github.com/northwind/infer", branch: "gpu", url: "infer.northwind.io", status: "paused", frontend: "none", backend: "down", lastDeploy: ago(4320), serverId: "nyc-03" },
+  { id: "p1", name: "atlas-web", framework: "Next.js", repo: "github.com/helm-demo/atlas-web", branch: "main", url: "atlas.demo.helm.run", status: "live", frontend: "healthy", backend: "healthy", lastDeploy: ago(14), serverId: "fra-01" },
+  { id: "p2", name: "ledger-api", framework: "NestJS", repo: "github.com/helm-demo/ledger-api", branch: "main", url: "api.ledger.dev", status: "building", frontend: "none", backend: "healthy", lastDeploy: ago(2), serverId: "fra-01" },
+  { id: "p3", name: "orbit-dashboard", framework: "Vite", repo: "github.com/helm-demo/orbit", branch: "develop", url: "orbit.demo.helm.run", status: "live", frontend: "healthy", backend: "degraded", lastDeploy: ago(180), serverId: "ams-02" },
+  { id: "p4", name: "pulse-ingest", framework: "Go", repo: "github.com/helm-demo/pulse", branch: "main", url: "ingest.pulse.sh", status: "failed", frontend: "none", backend: "down", lastDeploy: ago(55), serverId: "nyc-03" },
+  { id: "p5", name: "marketing-site", framework: "Astro", repo: "github.com/helm-demo/site", branch: "main", url: "demo.helm.run", status: "live", frontend: "healthy", backend: "none", lastDeploy: ago(1440), serverId: "ams-02" },
+  { id: "p6", name: "ml-inference", framework: "FastAPI", repo: "github.com/helm-demo/infer", branch: "gpu", url: "infer.demo.helm.run", status: "paused", frontend: "none", backend: "down", lastDeploy: ago(4320), serverId: "nyc-03" },
 ];
 
 export const deployments: T.Deployment[] = [
   { id: "d-9f2a", project: "ledger-api", commit: "a3f9c21", message: "feat: idempotent payment intents", branch: "main", author: "mira", status: "building", durationSec: 74, createdAt: ago(2), url: "api.ledger.dev" },
-  { id: "d-9f29", project: "atlas-web", commit: "7be04d1", message: "fix: hydrate search filters from URL", branch: "main", author: "jonas", status: "live", durationSec: 128, createdAt: ago(14), url: "atlas.northwind.io" },
+  { id: "d-9f29", project: "atlas-web", commit: "7be04d1", message: "fix: hydrate search filters from URL", branch: "main", author: "jonas", status: "live", durationSec: 128, createdAt: ago(14), url: "atlas.demo.helm.run" },
   { id: "d-9f28", project: "pulse-ingest", commit: "c11e8a0", message: "chore: bump kafka client", branch: "main", author: "ade", status: "failed", durationSec: 41, createdAt: ago(55), url: "ingest.pulse.sh" },
-  { id: "d-9f27", project: "orbit-dashboard", commit: "52d7f9e", message: "feat: team-level usage charts", branch: "develop", author: "mira", status: "live", durationSec: 96, createdAt: ago(180), url: "orbit.northwind.io" },
-  { id: "d-9f26", project: "atlas-web", commit: "e8a31bc", message: "perf: stream product grid", branch: "main", author: "jonas", status: "superseded", durationSec: 131, createdAt: ago(600), url: "atlas.northwind.io" },
-  { id: "d-9f25", project: "marketing-site", commit: "0f4c2d7", message: "content: pricing update", branch: "main", author: "lea", status: "live", durationSec: 38, createdAt: ago(1440), url: "northwind.io" },
+  { id: "d-9f27", project: "orbit-dashboard", commit: "52d7f9e", message: "feat: team-level usage charts", branch: "develop", author: "mira", status: "live", durationSec: 96, createdAt: ago(180), url: "orbit.demo.helm.run" },
+  { id: "d-9f26", project: "atlas-web", commit: "e8a31bc", message: "perf: stream product grid", branch: "main", author: "jonas", status: "superseded", durationSec: 131, createdAt: ago(600), url: "atlas.demo.helm.run" },
+  { id: "d-9f25", project: "marketing-site", commit: "0f4c2d7", message: "content: pricing update", branch: "main", author: "lea", status: "live", durationSec: 38, createdAt: ago(1440), url: "demo.helm.run" },
 ];
 
 export const queue: T.Deployment[] = [
-  { id: "d-9f2b", project: "atlas-web", commit: "91ac4f2", message: "feat: saved carts", branch: "main", author: "jonas", status: "queued", durationSec: 0, createdAt: ago(1), url: "atlas.northwind.io" },
-  { id: "d-9f2c", project: "orbit-dashboard", commit: "3de71b8", message: "fix: tooltip overflow", branch: "develop", author: "ade", status: "queued", durationSec: 0, createdAt: ago(0), url: "orbit.northwind.io" },
+  { id: "d-9f2b", project: "atlas-web", commit: "91ac4f2", message: "feat: saved carts", branch: "main", author: "jonas", status: "queued", durationSec: 0, createdAt: ago(1), url: "atlas.demo.helm.run" },
+  { id: "d-9f2c", project: "orbit-dashboard", commit: "3de71b8", message: "fix: tooltip overflow", branch: "develop", author: "ade", status: "queued", durationSec: 0, createdAt: ago(0), url: "orbit.demo.helm.run" },
 ];
 
 export const metrics = (points = 24): T.MetricPoint[] => {
@@ -59,7 +59,7 @@ export const containers: T.Container[] = [
 ];
 
 export const domains: T.Domain[] = [
-  { id: "dm1", name: "atlas.northwind.io", project: "atlas-web", ssl: "valid", https: true, expires: "2027-02-11", dns: "verified", records: [{ type: "A", name: "@", value: "88.198.42.17" }, { type: "CNAME", name: "www", value: "atlas.northwind.io" }] },
+  { id: "dm1", name: "atlas.demo.helm.run", project: "atlas-web", ssl: "valid", https: true, expires: "2027-02-11", dns: "verified", records: [{ type: "A", name: "@", value: "88.198.42.17" }, { type: "CNAME", name: "www", value: "atlas.demo.helm.run" }] },
   { id: "dm2", name: "api.ledger.dev", project: "ledger-api", ssl: "valid", https: true, expires: "2026-12-02", dns: "verified", records: [{ type: "A", name: "api", value: "88.198.42.17" }] },
   { id: "dm3", name: "ingest.pulse.sh", project: "pulse-ingest", ssl: "expiring", https: true, expires: "2026-11-24", dns: "verified", records: [{ type: "CNAME", name: "ingest", value: "nyc-03.helm.run" }] },
   { id: "dm4", name: "beta.orbit.app", project: "orbit-dashboard", ssl: "none", https: false, expires: "—", dns: "pending", records: [{ type: "A", name: "beta", value: "145.12.88.203" }] },
@@ -212,7 +212,7 @@ export const pipeline: T.PipelineStep[] = [
 ];
 
 export const buildLogs: T.LogLine[] = [
-  ["info", "Cloning github.com/northwind/ledger-api@a3f9c21"],
+  ["info", "Cloning github.com/helm-demo/ledger-api@a3f9c21"],
   ["info", "Detected NestJS · Node 20.11 · npm 10"],
   ["info", "npm ci --omit=dev=false"],
   ["warn", "npm WARN deprecated glob@7.2.3"],
