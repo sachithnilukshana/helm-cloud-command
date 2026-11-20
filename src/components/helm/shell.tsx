@@ -5,7 +5,7 @@ import { Bell, ChevronsLeft, ChevronsRight, ChevronDown, Menu, Search, Settings,
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { api, DEMO_MODE } from "@/lib/helm/api";
-import { ConnectionBadge, DemoNotice } from "@/components/helm/ui";
+import { ConnectionBadge, DemoNotice, DemoTag } from "@/components/helm/ui";
 import { nav, flatNav } from "./nav";
 import { StatusBadge, timeAgo } from "./ui";
 import { CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
@@ -65,7 +65,7 @@ function SidebarFooter({ collapsed, onToggle }: { collapsed?: boolean; onToggle?
     <div className="space-y-2 border-t p-2">
       {!collapsed && s && (
         <Link to="/servers/$id" params={{ id: s.id }} className="block rounded-md border bg-background/50 p-2.5 hover:border-primary/40">
-          <div className="flex items-center justify-between"><span className="font-mono text-xs">{s.name}</span><StatusBadge status={s.status} /></div>
+          <div className="flex items-center justify-between"><span className="font-mono text-xs">{s.name}</span><span className="flex items-center gap-1">{DEMO_MODE && <DemoTag />}<StatusBadge status={s.status} /></span></div>
           <div className="mt-1.5 flex gap-3 text-[11px] text-muted-foreground"><span>CPU {s.cpu}%</span><span>RAM {s.ram}%</span><span>{s.region}</span></div>
         </Link>
       )}
